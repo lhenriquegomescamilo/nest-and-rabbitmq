@@ -37,6 +37,10 @@ $ npm install
 ## Running the app
 
 ```bash
+# First running the docker with the rabbit-mq
+$ docker-compose up -d && docker-compose logs rabbitmq 
+
+
 # development
 $ npm run start
 
