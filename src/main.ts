@@ -1,8 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Transport } from '@nestjs/common/enums/transport.enum';
+import { Logger } from '@nestjs/common';
+
+const NODE_PORT = 3000;
 
 async function bootstrap() {
+  const logger = new Logger('Main');
   const app = await NestFactory.create(AppModule);
   app.connectMicroservice({
     transport: Transport.RMQ,
@@ -13,7 +17,25 @@ async function bootstrap() {
     },
   });
   await app.startAllMicroservicesAsync();
-  await app.listen(3000);
+  await app.listen(NODE_PORT);
+  logger.log(`
+  o               .        ___---___                    .
+       .              .--\\        --.     .     .         .
+                    ./.;_.\\     __/~ \\.     
+                   /;  / \`-'  __\\    . \\                            
+ .        .       / ,--'     / .   .;   \\        |
+                 | .|       /       __   |      -O-       .
+                |__/    __ |  . ;   \\ | . |      |
+                |      /  \\\\_    . ;| \\___|    
+   .    o       |      \\  .~\\\\___,--'     |           .
+                 |     | . ; ~~~~\\_    __|
+    |             \\    \\   .  .  ; \\  /_/   .
+   -O-        .    \\   /         . |  ~/                  .
+    |    .          ~\\ \\   .      /  /~          o
+  .                   ~--___ ; ___--~       
+                 .          ---         .              - by - Camilo
+  `);
+  logger.log(`Server running on port ${NODE_PORT}`);
 }
 
 bootstrap();
