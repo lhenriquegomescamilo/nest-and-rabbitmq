@@ -10,7 +10,6 @@ export class RabbitMqWorkerService {
   private static readonly consumeQueueOptions = { noAck: false };
 
   constructor() {
-    this.listemToQueue();
   }
 
   listemToQueue() {
@@ -32,7 +31,7 @@ export class RabbitMqWorkerService {
 
     return channel.assertQueue(process.env.QUEUE_DEFAULT, RabbitMqWorkerService.assertQueueOptions)
       .then(() => channel.prefetch(1))
-      .then(() => channel.consume('worker_queue', ackMessage, RabbitMqWorkerService.consumeQueueOptions));
+      .then(() => channel.consume(process.env.QUEUE_DEFAULT, ackMessage, RabbitMqWorkerService.consumeQueueOptions));
   }
 
 }
