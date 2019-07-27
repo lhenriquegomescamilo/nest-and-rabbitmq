@@ -21,7 +21,7 @@ export class RabbitMqSenderService {
   private _assertAndSendToQueue(channel: any, message: MessageDto) {
     const bufferedData = Buffer.from(message.message);
     return channel
-      .assertQueue('worker_queue', RabbitMqSenderService.assertQueueOptions)
+      .assertQueue(process.env.QUEUE_DEFAULT, RabbitMqSenderService.assertQueueOptions)
       .then(() => channel.sendToQueue('worker_queue', bufferedData, RabbitMqSenderService.sendToQueueOptions))
       .then(() => channel.close());
 

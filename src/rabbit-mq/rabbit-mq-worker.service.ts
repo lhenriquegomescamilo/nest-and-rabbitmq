@@ -30,7 +30,7 @@ export class RabbitMqWorkerService {
       })
       .then((msg: any) => channel.ack(message));
 
-    return channel.assertQueue('worker_queue', RabbitMqWorkerService.assertQueueOptions)
+    return channel.assertQueue(process.env.QUEUE_DEFAULT, RabbitMqWorkerService.assertQueueOptions)
       .then(() => channel.prefetch(1))
       .then(() => channel.consume('worker_queue', ackMessage, RabbitMqWorkerService.consumeQueueOptions));
   }
