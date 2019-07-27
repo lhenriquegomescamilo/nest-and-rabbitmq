@@ -8,15 +8,15 @@ const NODE_PORT = 3000;
 async function bootstrap() {
   const logger = new Logger('Main');
   const app = await NestFactory.create(AppModule);
-  app.connectMicroservice({
-    transport: Transport.RMQ,
-    options: {
-      urls: [`amqp://localhost:5672`],
-      queue: 'cats_queue',
-      queueOptions: { durable: false },
-    },
-  });
-  await app.startAllMicroservicesAsync();
+  // app.connectMicroservice({
+  //   transport: Transport.RMQ,
+  //   options: {
+  //     urls: [`amqp://localhost:5672`],
+  //     queue: 'cats_queue',
+  //     queueOptions: { durable: false },
+  //   },
+  // });
+  // await app.startAllMicroservicesAsync();
   await app.listen(NODE_PORT);
   // @ts-ignore
   await Promise.resolve(logger.log(`
