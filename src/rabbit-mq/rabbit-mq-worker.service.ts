@@ -28,7 +28,7 @@ export class RabbitMqWorkerService {
         this.logger.log(`THE MESSSAGE IS ${msg.content.toString()}`);
         return message;
       })
-      .then((msg: any) => channel.ack(msg));
+      .then(() => channel.ack(message));
 
     return channel.assertQueue(process.env.QUEUE_DEFAULT, RabbitMqWorkerService.assertQueueOptions)
       .then(() => channel.prefetch(1))
