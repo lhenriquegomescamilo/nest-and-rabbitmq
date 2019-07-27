@@ -19,9 +19,10 @@ async function bootstrap() {
   await app.startAllMicroservicesAsync();
   await app.listen(NODE_PORT);
   await Promise.resolve(logger.log(`
+  Hello
   o               .        ___---___                    .
        .              .--\\        --.     .     .         .
-                    ./.;_.\\     __/~ \\.     
+                    ./.;_.\\     __/~ \\.
                    /;  / \`-'  __\\    . \\                            
  .        .       / ,--'     / .   .;   \\        |
                  | .|       /       __   |      -O-       .
