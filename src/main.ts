@@ -18,6 +18,7 @@ async function bootstrap() {
   });
   await app.startAllMicroservicesAsync();
   await app.listen(NODE_PORT);
+  // @ts-ignore
   await Promise.resolve(logger.log(`
   Hello
   o               .        ___---___                    .
@@ -36,7 +37,9 @@ async function bootstrap() {
   .                   ~--___ ; ___--~       
                  .          ---         .              - by - Camilo
   `));
+  // @ts-ignore
   return Promise.resolve(logger.log(`Server running on port ${NODE_PORT}`));
 }
 
+// @ts-ignore
 bootstrap();
