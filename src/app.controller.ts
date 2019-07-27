@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { RabbitMqService } from './rabbit-mq/rabbit-mq.service';
+import { RabbitMqSenderService } from './rabbit-mq/rabbit-mq-sender.service';
 import { MessageDto } from './dto/message-dto';
 
 @Controller()
@@ -10,7 +10,7 @@ export class AppController {
 
   constructor(
     private readonly appService: AppService,
-    private readonly rabbitMqService: RabbitMqService,
+    private readonly rabbitMqService: RabbitMqSenderService,
   ) {
   }
 
@@ -21,7 +21,7 @@ export class AppController {
 
   @Post()
   sendMessage(@Body() message: MessageDto) {
-    this.logger.log(`Sending message ${message}`);
+    this.logger.log(`Sending message ${message.message}`);
     return this.rabbitMqService.sendMessage(message);
   }
 }

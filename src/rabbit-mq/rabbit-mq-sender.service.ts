@@ -3,7 +3,7 @@ import * as amqp from 'amqplib';
 import { MessageDto } from '../dto/message-dto';
 
 @Injectable()
-export class RabbitMqService {
+export class RabbitMqSenderService {
 
   private static readonly assertQueueOptions = { durable: true };
   private static readonly sendToQueueOptions = { persistent: true };
@@ -21,8 +21,8 @@ export class RabbitMqService {
   private _assertAndSendToQueue(channel: any, message: MessageDto) {
     const bufferedData = Buffer.from(message.message);
     return channel
-      .assertQueue('worker_queue', RabbitMqService.assertQueueOptions)
-      .then(() => channel.sendToQueue('worker_queue', bufferedData, RabbitMqService.sendToQueueOptions))
+      .assertQueue('worker_queue', RabbitMqSenderService.assertQueueOptions)
+      .then(() => channel.sendToQueue('worker_queue', bufferedData, RabbitMqSenderService.sendToQueueOptions))
       .then(() => channel.close());
 
   }
